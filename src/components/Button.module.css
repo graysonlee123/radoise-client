@@ -5,3 +5,8 @@
   background-color: #fff;
   color: #1e140f;
 }
+
+button[disabled] {
+  opacity: 60%;
+  cursor: not-allowed;
+}
