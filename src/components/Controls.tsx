@@ -1,11 +1,12 @@
 import { useMutation } from "@tanstack/react-query"
-import { useContext } from "react"
+import { useContext, useState, type ChangeEventHandler } from "react"
 import Button from "./Button"
 import { EnvContext } from "./EnvProvider"
 import Loading from "./Loading"
 
 function Controls() {
   const env = useContext(EnvContext)
+  const [volume, setVolume] = useState('0')
 
   const playMutation = useMutation({
     mutationKey: ['play'],
@@ -16,6 +17,16 @@ function Controls() {
     mutationKey: ['pause'],
     mutationFn: () => fetch(`${env.VITE_API_URL}/pause`),
   })
+
+  const volumeMutation = useMutation({
+    mutationKey: ['volume'],
+    mutationFn: (volume: number) => fetch(`${env.VITE_API_URL}/volume?level=${volume}`),
+  })
+
+  const handleVolumeBlur: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const valueAsInteger = parseInt(e.target.value)
+    volumeMutation.mutate(valueAsInteger)
+  }
 
   return (
     <div style={{display: "flex", gap: "1rem"}}>
@@ -45,6 +56,16 @@ function Controls() {
         )}
         Pause
       </Button>
+      <input
+        disabled={volumeMutation.isPending}
+        type="number"
+        step="1"
+        min="0"
+        max="100"
+        value={volume}
+        onChange={(e) => setVolume(e.target.value)}
+        onBlur={handleVolumeBlur}
+      />
     </div>
   )
 }
