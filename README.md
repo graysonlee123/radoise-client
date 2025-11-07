@@ -56,7 +56,7 @@ docker build --build-arg API_URL=http://192.168.86.27:3000 -t radoise-client:lat
 Run in detached state:
 
 ```shell
-docker run -p <your-port>:4173 radoise-client:latest
+docker run -d -p <your-port>:4173 radoise-client:latest
 ```
 ## Changes
 
