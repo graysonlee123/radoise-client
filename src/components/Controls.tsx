@@ -10,17 +10,17 @@ function Controls() {
 
   const playMutation = useMutation({
     mutationKey: ['play'],
-    mutationFn: () => fetch(`${env.VITE_API_URL}/play`),
+    mutationFn: () => fetch(`${env.VITE_API_URL}/play`, {method: "POST"}),
   })
 
   const pauseMutation = useMutation({
     mutationKey: ['pause'],
-    mutationFn: () => fetch(`${env.VITE_API_URL}/pause`),
+    mutationFn: () => fetch(`${env.VITE_API_URL}/pause`, {method: "POST"}),
   })
 
   const volumeMutation = useMutation({
     mutationKey: ['volume'],
-    mutationFn: (volume: number) => fetch(`${env.VITE_API_URL}/volume?level=${volume}`),
+    mutationFn: (volume: number) => fetch(`${env.VITE_API_URL}/volume?level=${volume}`, {method: "POST"}),
   })
 
   const handleVolumeBlur: ChangeEventHandler<HTMLInputElement> = (e) => {
