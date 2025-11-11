@@ -1,6 +1,9 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { useContext } from "react"
+import styles from "./Database.module.css"
 import { EnvContext } from "./EnvProvider"
+import Header from "./Header"
+import Loading from "./Loading"
 
 function Database() {
   const env = useContext(EnvContext)
@@ -20,10 +23,19 @@ function Database() {
   })
 
   return (
-    <div>
+    <div className={styles.container}>
+      <Header>
+        Sounds
+      </Header>
       {query.isError && (
         <div>
           Error loading database.
+        </div>
+      )}
+
+      {query.isLoading && (
+        <div>
+          <Loading/> Loading sounds...
         </div>
       )}
 

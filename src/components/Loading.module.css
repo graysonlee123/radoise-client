@@ -1,5 +1,5 @@
 .loading {
-  display: block;
+  display: inline-block;
   animation-name: spin;
   animation-play-state: running;
   animation-duration: 1000ms;

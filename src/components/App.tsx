@@ -2,6 +2,7 @@
 
 import './App.css'
 import Controls from './Controls'
+import Database from './Database'
 import EnvProvider from './EnvProvider'
 import QueryClientProvider from './QueryClientProvider'
 import Status from './Status'
@@ -13,6 +14,7 @@ function App() {
         <QueryClientProvider>
           <Status/>
           <Controls/>
+          <Database/>
         </QueryClientProvider>
       </EnvProvider>
     </main>

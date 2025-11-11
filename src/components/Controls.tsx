@@ -1,9 +1,10 @@
 import { useMutation } from "@tanstack/react-query"
 import { useContext, useState, type ChangeEventHandler } from "react"
 import Button from "./Button"
+import styles from "./Controls.module.css"
 import { EnvContext } from "./EnvProvider"
+import Header from "./Header"
 import Loading from "./Loading"
-import Database from "./Database"
 
 function Controls() {
   const env = useContext(EnvContext)
@@ -30,7 +31,10 @@ function Controls() {
   }
 
   return (
-    <>
+    <div className={styles.container}>
+      <Header>
+        Controls
+      </Header>
       <div style={{display: "flex", gap: "1rem"}}>
         <Button
           disabled={playMutation.isPending}
@@ -69,8 +73,7 @@ function Controls() {
           onBlur={handleVolumeBlur}
         />
       </div>
-      <Database/>
-    </>
+    </div>
   )
 }
 
