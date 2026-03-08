@@ -58,6 +58,27 @@ Run in detached state:
 ```shell
 docker run -d -p <your-port>:4173 radoise-client:latest
 ```
+## Deployment behind a reverse proxy
+
+If the client is served over HTTPS but the radoise server is on a local HTTP address, browsers will block the requests as [mixed content](https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content). The fix is to proxy the API through your reverse proxy and build with `VITE_API_URL=/api`.
+
+Example Caddy config:
+
+```
+radoise.example.com {
+        handle_path /api/* {
+                reverse_proxy 192.168.1.x:3000
+        }
+        reverse_proxy localhost:<your-port>
+}
+```
+
+Then build with:
+
+```shell
+docker build --build-arg API_URL=/api -t radoise-client:latest .
+```
+
 ## Changes
 
 See the [commit history](https://github.com/graysonlee123/radoise-client/commits/main) for recent changes and updates.
